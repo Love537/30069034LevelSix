@@ -1,0 +1,37 @@
+.nav {
+    background-color: green; /* Set the background color to green */
+    display: flex; /* Display the navigation items horizontally */
+    justify-content: space-between; /* Align items at each end of the container */
+    padding: 5px; /* Add some padding for spacing */
+}
+
+.nav-links {
+    list-style: none; /* Remove default list styles */
+    display: flex; /* Display the list items horizontally */
+}
+
+.nav-links li {
+    margin-right: 20px; /* Add some margin between each navigation item */
+}
+
+.nav-links li a {
+    text-decoration: none; /* Remove underline from links */
+    color: white; /* Set text color to white */
+    font-size: 18px; /* Set the font size */
+}
+
+.CustCRUD{
+    margin-top: 20px;
+}
+.matrix-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    height: 150px;
+    float: right; /* Align boxes to the right */
+}
+
+
+
+
