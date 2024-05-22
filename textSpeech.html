@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+<title>Home</title>
+<link rel="stylesheet" type="text/css" href="Textspeech.css">
+<link rel="stylesheet" href="navbar.css">
+</head>
+<body>
+            <!--Navbar-->
+    <nav class="nav">
+      <div class="heading">
+        <h4>Navigation Bar</h4>
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a class="active" href="Imageupload.html">Customer Image</a></li>
+        <li><a href="textSpeech.html">Text to speech</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+	<div class="voice_to_text"> 
+		<h1>Voice to Text Converter</h1>
+    <textarea id="convert_text"></textarea>
+    <button id="click_to_Convert">Voice To Text</button>
+    <input type="submit" value="submit" class="sub" id="submit"><br><br>
+  </div>
+   
+   <!--//////////////////////////////////////////////////-->
+   <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.1/firebase-database.js";
+        
+    ///firebasev10
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDEYpXPyu1ClVwPiubNJQbeSmwDVkHTiAA",
+      authDomain: "textspeech-99391.firebaseapp.com",
+      databaseURL: "https://textspeech-99391-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "textspeech-99391",
+      storageBucket: "textspeech-99391.appspot.com",
+      messagingSenderId: "691489717249",
+      appId: "1:691489717249:web:e7f3461955b677af1cd400"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    // Get a reference to the database service
+    const db = getDatabase(app);
+
+    document.getElementById("click_to_Convert").addEventListener('click', function() {
+      var speech = true;
+      window.SpeechRecognition = window.webkitSpeechRecognition;
+
+      const recognition = new SpeechRecognition();
+      recognition.interimResults = true;
+
+      recognition.addEventListener('result', e => {
+        const transcript = Array.from(e.results)
+          .map(result => result[0])
+          .map(result => result.transcript)
+          .join('');
+
+        document.getElementById("convert_text").innerHTML = transcript;
+      });
+
+      if (speech == true) {
+        recognition.start();
+      }
+    });
+
+    document.getElementById("submit").addEventListener('click', function(e) {
+      e.preventDefault();
+      const text = document.getElementById("convert_text").value;
+      // Generate a simple unique ID for the new entry
+      const uniqueId = 'user_' + new Date().getTime();
+      set(ref(db, 'user/' + uniqueId), {
+        convert_text: text
+      });
+    });
+  </script>
+   <!--//////////////////////////////////////////////////-->
+<script type="text/javascript" src="speech.js"></script>
+</body>
+</html>

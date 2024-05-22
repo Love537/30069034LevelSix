@@ -6,10 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Firebase Image Upload</title>
     <link rel="stylesheet" href="ImageUpload.css" />
+    <link rel="stylesheet" href="navbar.css">
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
   </head>
   <body>
+    <!--Navbar-->
+    <nav class="nav">
+      <div class="heading">
+        <h4>Navigation Bar</h4>
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a class="active" href="Imageupload.html">Customer Image</a></li>
+        <li><a href="textSpeech.html">Text to speech</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <!--Main Image form-->
     <div class="imageUpload">
       <input type="file" class="inp" onchange="getImageData(event)" />
       <button onclick="selectImage()" class="selectImage">Select Images</button>
@@ -21,6 +35,8 @@
       <span class="loading">Loading...</span>
       <img class="img" />
     </div>
+
+  
     <script>
           ///CDN FIRESTORE PROJECT NAME firebasev10 Email-ID: lovepreet6262277@gmail.com
                  // Import the functions you need from the SDKs you need

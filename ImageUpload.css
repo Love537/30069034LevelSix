@@ -76,14 +76,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    background:linear-gradient(to right bottom, #58495c, #031f6a);
   }
   
+  /*
   body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
   }
+   HIDE due to set for Navigation bar  */
   
   .loading {
     display: none;
