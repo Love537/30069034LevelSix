@@ -1,21 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Customer login Details</title>
     <link rel="stylesheet" href="Loginn.css">
     <title>Firebase V10 CRUD</title>
-</head>
-                <!--THIS IS COMBINES LOGIN AND CRUD JSON FOLDERS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  </head>
+  <!--THIS IS COMBINES LOGIN AND CRUD JSON FOLDERS-->
 <body>
     <nav class="nav">
         <div class="heading">
-          <h4>Navigation Bar</h4>
+          <h4>Customer data form</h4>
         </div>
         <ul class="nav-links">
           <li><a href="index.html">Home</a></li>
-          <li><a href="Thirdpage.html">Third</a></li>
+          <li><a href="Imageupload.html">Customer Image</a></li>
         </ul>
     </nav>   
     <!--NAV ABOVE-->
@@ -31,14 +32,14 @@
 
        <label>Department</label>
         <select id="DeptInp">
-          <option value="Development">Development</option>
-          <option value="Testing">Testing</option>
-          <option value="Mangment">Managment</option>
+           <option value="Development">Development</option>
+           <option value="Testing">Testing</option>
+           <option value="Mangment">Managment</option>
            <option value="Administration">Administration</option>
         </select>
         <br><br>
 
-        <label>Can swim</label>
+        <label>Existing Customer</label>
         <select id ="swimInp">
             <option value="yes">Yes</option>
             <option value="no">No</option>
@@ -47,6 +48,10 @@
 
         <label>CNIC NO</label>
        <input type="number" id="cnicInp">
+       <br><br>
+       <!-- written COMPLAINT BOX which later displa on web page-->
+       <label>Complaint Box</label>
+       <input type="text" id="ComplaintBox">
        <br><br>
 
          <button id="AddBtn">Add</button>
@@ -88,6 +93,8 @@
              let DeptInp = document.getElementById('DeptInp');
              let swimInp = document.getElementById('swimInp');
              let cnicInp = document.getElementById('cnicInp');
+             //Complaint box 
+             let ComplaintBox = document.getElementById('ComplaintBox');//Comaplaint box text
 
              let AddBtn = document.getElementById('AddBtn');
              let RetBtn = document.getElementById('ReBtn');
@@ -99,7 +106,9 @@
                      nameofemployee:{firstname:FnameInp.value, lastname:LnameInp.value},
                      department:DeptInp.value,
                      canswim:(swimInp.value =="yes"),
-                     cnic:Number(cnicInp.value)
+                     cnic:Number(cnicInp.value),
+                    // ComplaintBoxemploye:{complaint:ComplaintBox.value}//Complaint box 
+                    ComplaintBoxemploye:ComplaintBox.value,// Complaint box And its working......
                 }).then(()=>{
                     alert("Data Added Successfully");
                 }).catch(()=>{
@@ -118,6 +127,8 @@
                         LnameInp.value = snapshot.val().nameofemployee.lastname;
                         DeptInp.value =snapshot.val().department;
                         swimInp.value = (snapshot.val().canswim)? "yes": "no"; //retrive this as booloan statment
+                       /// ComplaintBox.value = snapshot.val().ComplaintBoxemploye.complaint;//Complaint box
+                       ComplaintBox.value=snapshot.val().ComplaintBoxemploye;
                     }
                     else {
                         alert("employee does not exist");
@@ -135,6 +146,7 @@
                      nameofemployee:{firstname:FnameInp.value, lastname:LnameInp.value},
                      department:DeptInp.value,
                      canswim:(swimInp.value =="yes"),
+                     ComplaintBoxemploye:ComplaintBox.value,
                 }).then(()=>{
                     alert("Data Updated Successfully");
                 }).catch((error)=>{
@@ -168,7 +180,7 @@
              function displayData() {
              const dbRef = ref(db);
 
-            // Assuming 'EmployeeSet' is the key for your data in Firestore
+            // Assuming 'EmployeeSet' is the key for  data in Firestore
             get(child(dbRef, 'EmployeeSet')).then(snapshot => {
                 if (snapshot.exists()) {
                     snapshot.forEach(childSnapshot => {
@@ -195,16 +207,18 @@
             matrixBox.innerHTML = `
                 <h3>${data.nameofemployee.firstname} ${data.nameofemployee.lastname}</h3>
                 <p>Department: ${data.department}</p>
-                <p>Can swim: ${data.canswim ? 'Yes' : 'No'}</p>
+                <p>Existing Customer: ${data.canswim ? 'Yes' : 'No'}</p>
                 <p>CNIC NO: ${data.cnic}</p>
+                <p>Customer Complaint:${data.ComplaintBoxemploye}</p>
             `;
 
             matrixContainer.appendChild(matrixBox);
         }
 
-        // Call the displayData function when the page loads
-        displayData();
-          </script>
-</body>
+            // Call the displayData function when the page loads
+            displayData();
+        </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
 </html>

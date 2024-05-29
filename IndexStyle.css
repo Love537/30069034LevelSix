@@ -67,23 +67,20 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
-.nav{
-    display: flex;
-    margin-bottom: 50%;
-   align-items: center;
-}
+
 .loginForm{
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: fit-content;
-    background: url(CRM.png);
+    background:url(CRM.png);
     background-size: cover;
     background-repeat: no-repeat;
     margin: 0px;
     padding: 0;
     font-family: sans-serif;
     box-sizing: border-box;
+    margin-top: 1%;
 
 }
 .a{
@@ -92,6 +89,7 @@
     border-style: none;
    
 }
+
 
 
 
